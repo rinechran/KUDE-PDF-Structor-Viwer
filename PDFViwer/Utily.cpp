@@ -2,11 +2,11 @@
 
 //Not find return std::string::npos 
 //find return string index
-std::string::size_type findStr(std::string & str, std::string & find) {
+std::string::size_type KUDE::findStr(std::string & str, std::string & find) {
 	return str.find(find);
 }
 
-std::string::size_type findFIrstStringNext(std::string & str, std::string & find) {
+std::string::size_type KUDE::findFIrstStringNext(std::string & str, std::string & find) {
 	auto iter = findStr(str, find);
 	if (iter == std::string::npos) {
 		return std::string::npos;
@@ -16,7 +16,7 @@ std::string::size_type findFIrstStringNext(std::string & str, std::string & find
 
 }
 
-std::string::size_type findFIrstString(std::string & str, std::string & find) {
+std::string::size_type KUDE::findFIrstString(std::string & str, std::string & find) {
 	auto iter = findStr(str, find);
 	if (iter == std::string::npos) {
 		return std::string::npos;
@@ -26,7 +26,7 @@ std::string::size_type findFIrstString(std::string & str, std::string & find) {
 
 }
 
-auto getFileStringLine(std::ifstream & in) {
+auto KUDE::getFileStringLine(std::ifstream & in) {
 	char temp;
 	std::string str;
 	while (true) {

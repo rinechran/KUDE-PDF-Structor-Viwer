@@ -145,6 +145,7 @@
     <ClCompile Include="Utily.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="KUDEType.h" />
     <ClInclude Include="PdfHeader.h" />
     <ClInclude Include="kude.h" />
     <ClInclude Include="Trailer.h" />

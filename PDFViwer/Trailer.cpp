@@ -2,13 +2,13 @@
 using namespace std::string_literals;
 
 
-void Trailer::read(std::ifstream & obj) {
+void KUDE::Trailer::read(std::ifstream & obj) {
 	if(!findTrailer(obj)) throw std::runtime_error("trailer");
 	if (!findStartxref(mTrailer)) throw std::runtime_error("not find startxref offset");
 
 }
 
-bool Trailer::findStartxref(std::string str) {
+bool KUDE::Trailer::findStartxref(std::string str) {
 	auto iter = findFIrstStringNext(str, "startxref"s);
 	if (iter == std::string::npos)
 		return false;
@@ -25,15 +25,15 @@ bool Trailer::findStartxref(std::string str) {
 	return true;
 }
 
-bool Trailer::findTrailer(std::ifstream & obj) {
+bool KUDE::Trailer::findTrailer(std::ifstream & obj) {
 	std::string temp;
-	BUFESIZE buf;
+	KUDE::TYPE::BUFESIZE buf;
 	obj.seekg(0, std::ios::end);
 	std::size_t filesize = obj.tellg();
 	std::size_t seek = filesize;
 
 
-	seek -= sizeof(BUFESIZE) - 1; // 1023 find 
+	seek -= sizeof(KUDE::TYPE::BUFESIZE) - 1; // 1023 find 
 	obj.seekg(seek);
 	obj.read(reinterpret_cast<char*>(&buf), sizeof(buf) - 1);
 	buf[sizeof(buf) - 1] = NULL;
@@ -54,6 +54,6 @@ bool Trailer::findTrailer(std::ifstream & obj) {
 
 }
 
-int Trailer::getMstartRefPos() {
+int KUDE::Trailer::getMstartRefPos() {
 	return mStartRefPos;
 }
