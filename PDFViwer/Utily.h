@@ -1,5 +1,7 @@
-﻿#include "kude.h"
-
+#pragma once
+using BYTE = char;
+using BUFESIZE = BYTE[21];
+using PDFVersion = BYTE[9];
 
 
 auto getFileStringLine(std::ifstream& in) {
@@ -11,8 +13,4 @@ auto getFileStringLine(std::ifstream& in) {
 		str += temp;
 	}
 	return str;
-}
-int main() {
-	std::ifstream in("2.txt");
-	std::cout<<getFileStringLine(in);
 }

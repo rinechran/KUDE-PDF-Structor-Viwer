@@ -140,8 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PdfHeader.cpp" />
+    <ClCompile Include="Trailer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PdfHeader.h" />
+    <ClInclude Include="kude.h" />
+    <ClInclude Include="Trailer.h" />
+    <ClInclude Include="Utily.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>
