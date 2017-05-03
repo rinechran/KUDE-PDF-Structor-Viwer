@@ -1,42 +1,55 @@
 #include "Trailer.h"
+using namespace std::string_literals;
+
 
 void Trailer::read(std::ifstream & obj) {
-	findTrailer(obj);
-	findStartxref(mTrailer);
+	if(!findTrailer(obj)) throw std::runtime_error("trailer");
+	if (!findStartxref(mTrailer)) throw std::runtime_error("not find startxref offset");
 
 }
 
-void Trailer::findStartxref(std::string str) {
-	std::string temp = mTrailer;
-	auto startpos = mTrailer.find("startxref");
-	temp = temp.substr(startpos + sizeof("startxref"));
+bool Trailer::findStartxref(std::string str) {
+	auto iter = findFIrstStringNext(str, "startxref"s);
+	if (iter == std::string::npos)
+		return false;
+
 	std::stringstream stream;
-	stream.str(temp);
+	stream.str(str);
 
 	if (!(stream >> mStartRefPos))
 		throw std::runtime_error("not find startxref offset");
+
+#ifdef _DEBUG
+	KOUD_LOG(mStartRefPos);
+#endif
+	return true;
 }
 
-void Trailer::findTrailer(std::ifstream & obj) {
+bool Trailer::findTrailer(std::ifstream & obj) {
+	std::string temp;
 	BUFESIZE buf;
 	obj.seekg(0, std::ios::end);
 	std::size_t filesize = obj.tellg();
 	std::size_t seek = filesize;
-	while (seek > 0) {
-		seek -= sizeof(BUFESIZE) - 1;
-		obj.seekg(seek);
-		obj.read(reinterpret_cast<char*>(&buf), sizeof(buf) - 1);
-		buf[sizeof(buf) - 1] = NULL;
-		mTrailer = buf + mTrailer;
-		std::size_t found;
-		found = mTrailer.find("trailer");
-		if (found != std::string::npos) {
-			mTrailer.erase(0, found);
-			return;
-		}
-	}
 
-	throw std::runtime_error("not find trailer offset");
+
+	seek -= sizeof(BUFESIZE) - 1; // 1023 find 
+	obj.seekg(seek);
+	obj.read(reinterpret_cast<char*>(&buf), sizeof(buf) - 1);
+	buf[sizeof(buf) - 1] = NULL;
+
+	temp = buf;
+	auto iter = findFIrstString(temp, "trailer"s);
+	if (iter == std::string::npos)
+		return false;
+
+	this->mTrailer = std::move(temp);
+
+#ifdef _DEBUG
+	KOUD_LOG(mTrailer);
+#endif
+
+	return true;
 
 
 }

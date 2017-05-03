@@ -142,6 +142,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PdfHeader.cpp" />
     <ClCompile Include="Trailer.cpp" />
+    <ClCompile Include="Utily.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PdfHeader.h" />
