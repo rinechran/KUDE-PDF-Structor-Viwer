@@ -140,12 +140,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="PDFDocument.cpp" />
     <ClCompile Include="PdfHeader.cpp" />
     <ClCompile Include="Trailer.cpp" />
     <ClCompile Include="Utily.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KUDEType.h" />
+    <ClInclude Include="KUDELOG.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="PDFDocument.h" />
     <ClInclude Include="PdfHeader.h" />
     <ClInclude Include="kude.h" />
     <ClInclude Include="Trailer.h" />

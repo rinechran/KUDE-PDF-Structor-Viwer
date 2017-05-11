@@ -3,12 +3,8 @@
 #include <iostream>
 #include <fstream>
 #include "KUDEType.h"
-
+#include "KUDELOG.h"
 namespace KUDE {
-
-#define KOUD_LOG(log) \
-std::cout<<"LINE : "<<__LINE__ <<"\t"<< "LOG:" <<log<<std::endl;
-
 
 	//Not find return std::string::npos 
 	//find return string index
@@ -19,6 +15,6 @@ std::cout<<"LINE : "<<__LINE__ <<"\t"<< "LOG:" <<log<<std::endl;
 	std::string::size_type findFIrstStringNext(std::string& str, std::string& find);
 
 	std::string::size_type findFIrstString(std::string & str, std::string & find);
-	auto getFileStringLine(std::ifstream& in);
+	std::string getFileStringLine(std::ifstream& in);
 
 }

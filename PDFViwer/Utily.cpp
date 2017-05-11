@@ -26,7 +26,7 @@ std::string::size_type KUDE::findFIrstString(std::string & str, std::string & fi
 
 }
 
-auto KUDE::getFileStringLine(std::ifstream & in) {
+std::string KUDE::getFileStringLine(std::ifstream & in) {
 	char temp;
 	std::string str;
 	while (true) {

@@ -5,6 +5,7 @@ using namespace std::string_literals;
 void KUDE::Trailer::read(std::ifstream & obj) {
 	if(!findTrailer(obj)) throw std::runtime_error("trailer");
 	if (!findStartxref(mTrailer)) throw std::runtime_error("not find startxref offset");
+	if (!mXrefTable.tableRead(obj,this->mStartRefPos));
 
 }
 
@@ -19,9 +20,8 @@ bool KUDE::Trailer::findStartxref(std::string str) {
 	if (!(stream >> mStartRefPos))
 		throw std::runtime_error("not find startxref offset");
 
-#ifdef _DEBUG
-	KOUD_LOG(mStartRefPos);
-#endif
+	KUDE::LOG::DEBUG_LINE_LOG(mStartRefPos);
+
 	return true;
 }
 
@@ -45,9 +45,9 @@ bool KUDE::Trailer::findTrailer(std::ifstream & obj) {
 
 	this->mTrailer = std::move(temp);
 
-#ifdef _DEBUG
-	KOUD_LOG(mTrailer);
-#endif
+
+	KUDE::LOG::DEBUG_LINE_LOG(mTrailer);
+
 
 	return true;
 
