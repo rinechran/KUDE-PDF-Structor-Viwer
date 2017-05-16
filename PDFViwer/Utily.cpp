@@ -26,13 +26,29 @@ std::string::size_type KUDE::findFIrstString(std::string & str, std::string & fi
 
 }
 
-std::string KUDE::getFileStringLine(std::ifstream & in) {
+std::string KUDE::getFileStringSeq(std::ifstream & in ,char ch) {
 	char temp;
 	std::string str;
 	while (true) {
 		in.read(&temp, 1);
-		if (temp == '\n') break;
+		if (temp == ch) break;
 		str += temp;
 	}
 	return str;
+}
+
+bool KUDE::stoi(std::string & str, int & num) {
+	try {
+		num = std::stoi(str);
+	}
+	catch (...) {
+		return false;
+	}
+	return true;
+
+}
+
+std::string KUDE::operator+(std::string &str, int intger) {
+	
+	return str + std::to_string(intger);
 }

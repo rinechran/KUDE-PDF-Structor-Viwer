@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Common">
+      <UniqueIdentifier>{11d3052f-2e70-4f0a-91ea-02c9a339f037}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,20 +27,20 @@
     <ClCompile Include="Trailer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PDFDocument.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Utily.cpp">
+      <Filter>Header Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectLInk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PDFDocument.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Utily.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="PdfHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -47,17 +50,23 @@
     <ClInclude Include="kude.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KUDEType.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PDFDocument.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KUDELOG.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="KUDEType.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Utily.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="KUDEDebug.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectLInk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

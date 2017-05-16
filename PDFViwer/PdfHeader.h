@@ -8,14 +8,14 @@
 #include "Utily.h"
 namespace KUDE {
 
-
+	using PDFVersion = KUDE::TYPE::BYTE[9];
 #pragma pack(push,1)
 	class PdfHeader {
 
 	public:
 		void read(std::ifstream &obj);
 	protected:
-		KUDE::TYPE::PDFVersion mVersion;
+		PDFVersion mVersion;
 		friend std::ostream& operator<<(std::ostream & os, PdfHeader &obj);
 		static constexpr std::size_t HeadSize = 8;
 	};

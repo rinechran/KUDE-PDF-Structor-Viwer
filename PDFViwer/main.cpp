@@ -3,9 +3,8 @@
 
 
 int main() {
-	std::ifstream in("1.pdf");
-	KUDE::Trailer a;
-	a.read(in);
+	KUDE::PDFDocument a("1.pdf"s);
+	a.read();
 	
 
 }
