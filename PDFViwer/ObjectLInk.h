@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include <iostream>
+#include <exception>
 
 
 
@@ -21,7 +22,7 @@ namespace KUDE {
 	public:
 		Section() = default;
 		Section(char * data);
-		int getDataInt();
+		size_t getDataInt();
 	private:
 		char mData[11];
 	};
@@ -39,7 +40,7 @@ namespace KUDE {
 	struct Isdead {
 		Isdead() = default;
 		Isdead(char * data);
-		bool isDead();
+		bool isUse();
 		
 		operator char() const {
 			return mIsDead[0];
@@ -55,7 +56,7 @@ namespace KUDE {
 	struct ObjectLInk {
 		Section mSection;
 		SubSection mSubSection;
-		Isdead mIsDead;
+		Isdead mEntry;
 
 	};
 #pragma pack(pop)

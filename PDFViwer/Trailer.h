@@ -7,24 +7,24 @@
 #include <vector>
 #include <string>
 #include "Utily.h"
+#include "Buffer.hpp"
 #include "ObjectLInk.h"
 #include "KUDEType.h"
 
 using namespace std::string_literals;
 
 using BUFESIZE = KUDE::TYPE::BYTE[1024];
-
 namespace KUDE {
+	using ObjectLinks = std::vector<KUDE::ObjectLInk>;
+	
 	class XrefTable {
 	public:
-		XrefTable() : mCount(0) {
-
-		}
+		XrefTable();
 		bool tableRead(std::ifstream &obj, KUDE::TYPE::offset& offest);
 
 	private:
 		int mCount;
-		std::vector<KUDE::ObjectLInk> mTable;
+		ObjectLinks mTable;
 
 		friend class Trailer;
 
@@ -33,6 +33,10 @@ namespace KUDE {
 	public: // public  member variable
 		bool read(std::ifstream &obj);
 
+
+	public:
+		// freand class XrefTable data geter
+		ObjectLinks& getObjectLinks();
 	private: // private member variable
 		bool findStartxref(std::string str);
 		bool findTrailer(std::ifstream &obj);

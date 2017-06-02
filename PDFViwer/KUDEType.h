@@ -1,11 +1,10 @@
 #pragma once
-
+#include <iostream>
 namespace KUDE {
 	namespace TYPE {
 		using BYTE = char;
 		using offset = std::size_t;
-		using Buffer = BYTE[1024];
-
+		using Buffer = BYTE[512];
 	}
 	namespace SEQUENCE {
 		const char Null = 0;

@@ -6,6 +6,7 @@
 #include <sstream>
 #include <algorithm>
 #include "Utily.h"
+#include "Buffer.hpp"
 namespace KUDE {
 
 	using PDFVersion = KUDE::TYPE::BYTE[9];
@@ -13,11 +14,12 @@ namespace KUDE {
 	class PdfHeader {
 
 	public:
-		void read(std::ifstream &obj);
+		bool read(std::ifstream &obj);
 	protected:
 		PDFVersion mVersion;
 		friend std::ostream& operator<<(std::ostream & os, PdfHeader &obj);
 		static constexpr std::size_t HeadSize = 8;
+		KUDE::Buffer<8> mBuffer;
 	};
 #pragma pack(pop)
 

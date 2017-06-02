@@ -11,12 +11,19 @@ bool KUDE::Trailer::read(std::ifstream & obj) {
 	}
 	if (!mXrefTable.tableRead(obj, this->mStartRefPos)) {
 		//throw std::runtime_error("mXrefTable read Error");
-		
 	}
 	return true;
 }
 
+
+// freand class XrefTable data geter
+
+KUDE::ObjectLinks& KUDE::Trailer::getObjectLinks() {
+	return mXrefTable.mTable;
+}
+
 bool KUDE::Trailer::findStartxref(std::string str) {
+
 	auto iter = findFIrstStringNext(str, "startxref"s);
 	if (iter == std::string::npos)
 		return false;
@@ -27,7 +34,7 @@ bool KUDE::Trailer::findStartxref(std::string str) {
 	if (!(stream >> mStartRefPos))
 		throw std::runtime_error("not find startxref offset");
 
-	KUDE::LOG::DEBUG_LINE_LOG(mStartRefPos);
+	KUDE::DEBUG::LOG(mStartRefPos);
 
 	return true;
 }
@@ -52,7 +59,7 @@ bool KUDE::Trailer::findTrailer(std::ifstream & obj) {
 
 	this->mTrailer = std::move(temp);
 
-	KUDE::LOG::DEBUG_LINE_LOG(mTrailer);
+	KUDE::DEBUG::LOG(mTrailer);
 
 
 	return true;
@@ -61,13 +68,19 @@ bool KUDE::Trailer::findTrailer(std::ifstream & obj) {
 }
 
 
+KUDE::XrefTable::XrefTable() : mCount(0) {
+
+}
+
 bool KUDE::XrefTable::tableRead(std::ifstream & obj, KUDE::TYPE::offset & offest) {
 	obj.seekg(offest);
-	std::string xref = KUDE::getFileStringSeq(obj);
+	KUDE::Buffer<12> buffer;
+
+	std::string xref = buffer.getStringFileSeq(obj,KUDE::SEQUENCE::LF);
 	if (xref != "xref"s) return false;
 
-	std::string startIndex = KUDE::getFileStringSeq(obj, KUDE::SEQUENCE::SP);
-	std::string endIndex = KUDE::getFileStringSeq(obj, KUDE::SEQUENCE::LF);
+	std::string startIndex = buffer.getStringFileSeq(obj, KUDE::SEQUENCE::SP);
+	std::string endIndex = buffer.getStringFileSeq(obj, KUDE::SEQUENCE::LF);
 
 	int start, end;
 
@@ -81,7 +94,7 @@ bool KUDE::XrefTable::tableRead(std::ifstream & obj, KUDE::TYPE::offset & offest
 	obj.read(reinterpret_cast<char*>(&mTable[0]),
 		sizeof(KUDE::ObjectLInk)*size);
 
-	KUDE::LOG::DEBUG_LINE_LOG("ObjectLInk szie : "s + size);
 
 	return true;
 }
+
