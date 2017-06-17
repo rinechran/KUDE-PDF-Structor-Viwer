@@ -74,13 +74,13 @@ KUDE::XrefTable::XrefTable() : mCount(0) {
 
 bool KUDE::XrefTable::tableRead(std::ifstream & obj, KUDE::TYPE::offset & offest) {
 	obj.seekg(offest);
-	KUDE::Buffer<12> buffer;
+	KUDE::FileBuffer<12> buffer;
 
-	std::string xref = buffer.getStringFileSeq(obj,KUDE::SEQUENCE::LF);
+	std::string xref = buffer.getStringFindSeq(obj,KUDE::SEQUENCE::LF);
 	if (xref != "xref"s) return false;
 
-	std::string startIndex = buffer.getStringFileSeq(obj, KUDE::SEQUENCE::SP);
-	std::string endIndex = buffer.getStringFileSeq(obj, KUDE::SEQUENCE::LF);
+	std::string startIndex = buffer.getStringFindSeq(obj, KUDE::SEQUENCE::SP);
+	std::string endIndex = buffer.getStringFindSeq(obj, KUDE::SEQUENCE::LF);
 
 	int start, end;
 

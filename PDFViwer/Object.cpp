@@ -3,39 +3,36 @@
 
 using namespace std::string_literals;
 
-bool KUDE::Object::objectReads(std::ifstream& fin , KUDE::ObjectLinks & objectLinks) {
+bool KUDE::Object::read(std::ifstream& fin , KUDE::ObjectLinks & objectLinks) {
 	
 	
 
 	for (auto & i : objectLinks) {
-		if (!i.mEntry.isUse()) continue; // entry
+		if (i.mEntry.isUse()) fin.seekg(i.mSection.getDataInt());
+		else continue;
 
-		fin.seekg(i.mSection.getDataInt());
 		objectRead(fin);
 	}
 	return true;
 }
 
 bool KUDE::Object::objectRead(std::ifstream & fin) {
+	//KUDE::FileBuffer<128> buffer;
+	ObjectNumBer objectNumber;
+	if (!getObjectNum(fin, objectNumber)) return false; //Object Num Read
 
-	// example 
-	// binary = 3337 20 
-	// string = 37 0
-	KUDE::Buffer<512> buffer;
-	std::string objetNumStr = buffer.getStringFileSeq(fin, KUDE::SEQUENCE::SP);
-	int objectNum; 
+	ObjectHeader objectHeader;
+	if (!getBodyObject(fin, objectHeader)) return false;
+
+	return true;
+
+}
+
+bool KUDE::Object::getObjectNum(std::ifstream & fin, ObjectNumBer & objectNum) {
+	KUDE::FileBuffer<32> buffer;
+	std::string objetNumStr = buffer.getStringFindSeq(fin, KUDE::SEQUENCE::SP);
 	if (!KUDE::stoi(objetNumStr, objectNum)) return false;
-	KUDE::DEBUG::LOG(objectNum);
-	exit(1);
-	//fstream.read(KUDE::Object)
 
-
-
-
-
-
-
-
-
-
+	KUDE::DEBUG::LOG("Object Number -> "s + objectNum);
+	return true;
 }

@@ -17,15 +17,22 @@ namespace KUDE {
 	{
 		// ObjectNumber;
 		// ObjectKey ObjectValue
-		using ObjectNumBer = std::size_t;
+		using ObjectNumBer = int;
 		using ObjectKey = std::string;
 		using ObjectValue = std::string;
 		using ObjectHeader = std::unordered_map<ObjectKey, ObjectValue>;
-	
+
 	public:
 		Object() {}
-		bool objectReads(std::ifstream& fin,KUDE::ObjectLinks &objectLinks);
+		bool read(std::ifstream& fin,KUDE::ObjectLinks &objectLinks);
 		bool objectRead(std::ifstream& fin);
+		bool getObjectNum(std::ifstream& fin, ObjectNumBer &objectNum);
+		bool getBodyObject(std::ifstream& in, ObjectHeader & objectHeader) {
+			KUDE::FileBuffer<128> buffer;
+			auto context = std::move(buffer.getStringUtilFind(in, "endobj"s));
+			return false;
+		}
+
 
 	private:
 		std::unordered_map<ObjectNumBer, ObjectHeader> mObjecter;

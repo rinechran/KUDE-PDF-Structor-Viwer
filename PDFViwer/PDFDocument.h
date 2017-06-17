@@ -19,7 +19,7 @@ namespace KUDE {
 			
 
 
-			if (!mObject.objectReads(mFstream,mTrailer.getObjectLinks())) return false;
+			if (!mObject.read(mFstream,mTrailer.getObjectLinks())) return false;
 
 			return true;
 		}
